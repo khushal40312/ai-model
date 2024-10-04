@@ -40,7 +40,7 @@ function App() {
 
     try {
       // Make a POST request to the backend API
-      const result = await axios.post('http://localhost:5000/generate', { prompt });
+      const result = await axios.post('https://ai-model-backend-u1cg.onrender.com/generate', { prompt });
 
       // Clean the response text and detect the language before setting the state
       const cleanedText = cleanResponse(result.data.response);
