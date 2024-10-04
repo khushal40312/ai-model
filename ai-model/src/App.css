@@ -52,3 +52,6 @@ button:hover {
   border-radius: 8px;
   font-weight: bold;
 }
+span{
+  text-wrap: pretty !important;
+}
