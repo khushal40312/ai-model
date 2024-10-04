@@ -11,9 +11,9 @@ dotenv.config();
 const app = express();
 const PORT = 5000;
 
-// CORS configuration
+// CORS configuration (Replace with your React frontend URL)
 const corsOptions = {
-  origin: ['https://ai-model-9hqx.onrender.com'], // Replace with your React frontend URL, and ensure it's an array
+  origin:  ['https://ai-model-9hqx.onrender.com'],
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
@@ -23,7 +23,7 @@ app.use(cors(corsOptions));
 // Middleware to parse JSON
 app.use(express.json());
 
-// Initialize GoogleGenerativeAI with API key
+// Initialize GoogleGenerativeAI with API key from environment variables
 const genAI = new GoogleGenerativeAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 // Define the API route for generating content
@@ -36,8 +36,12 @@ app.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    // Generate content using the model (verify the correct method and API usage)
-    const result = await genAI.generateText({ prompt, model: 'gemini-1.5-flash' });
+    // Use the correct method to generate content (verify with documentation)
+    const result = await genAI.generateText({
+      model: 'models/text-bison-001', // Use the appropriate model name
+      prompt: prompt,
+      temperature: 0.5, // Optional: Adjust generation parameters as needed
+    });
 
     // Send the generated content as a response
     res.json({ response: result.candidates[0].output });
