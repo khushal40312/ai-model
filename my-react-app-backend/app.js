@@ -13,7 +13,7 @@ const PORT = 5000;
 
 // CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your React frontend URL
+  origin: 'https://ai-model-9hqx.onrender.com, // Replace with your React frontend URL
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
