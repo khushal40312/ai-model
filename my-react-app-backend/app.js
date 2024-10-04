@@ -13,7 +13,7 @@ const PORT = 5000;
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://ai-model-9hqx.onrender.com, // Replace with your React frontend URL
+  origin: ['https://ai-model-9hqx.onrender.com'], // Replace with your React frontend URL, and ensure it's an array
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
@@ -24,8 +24,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Initialize GoogleGenerativeAI with API key
-const genAI = new GoogleGenerativeAI("AIzaSyAGc6hEpQwvaWTCGOjrB5qfRtFBBa0GsdY");
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+const genAI = new GoogleGenerativeAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 // Define the API route for generating content
 app.post('/generate', async (req, res) => {
@@ -37,11 +36,11 @@ app.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    // Generate content using the model
-    const result = await model.generateContent(prompt);
+    // Generate content using the model (verify the correct method and API usage)
+    const result = await genAI.generateText({ prompt, model: 'gemini-1.5-flash' });
 
     // Send the generated content as a response
-    res.json({ response: result.response.text() });
+    res.json({ response: result.candidates[0].output });
   } catch (error) {
     console.error('Error generating content:', error);
     res.status(500).json({ error: 'Failed to generate content' });
