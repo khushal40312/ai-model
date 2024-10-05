@@ -29,7 +29,7 @@ function App() {
 
     return text
       .replace(/```[\w]*\n/g, '') // Remove the language markers (e.g., ```python)
-      .replace(/[\r\n]+/g, '\n') // Remove extra line breaks
+     // .replace(/[\r\n]+/g, '\n') // Remove extra line breaks
       .trim(); // Trim leading and trailing spaces
   };
 
@@ -64,7 +64,7 @@ function App() {
         {/* Input field to accept the prompt */}
         <textarea
           rows="5"
-          cols="50"
+          cols="20"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Write your prompt here..."
@@ -86,7 +86,7 @@ function App() {
             marginTop: '30px',
             fontSize: '18px',
             textAlign: 'left',
-            width: '90%',
+            width: '100%',
             backgroundColor: '#282c34',
             color: '#ffffff',
             padding: '20px',
