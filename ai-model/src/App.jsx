@@ -8,7 +8,7 @@ import LoadingSpinner from './Component/LoadingSpinner';
 function App() {
   const [prompt, setPrompt] = useState(''); 
   const [responseLines, setResponseLines] = useState(''); 
-  const [exampleLines, setExampleLines] = useState(''); // State to store example code separately
+  const [exampleLines, setExampleLines] = useState(''); 
   const [language, setLanguage] = useState('javascript'); 
   const [loading, setLoading] = useState(false); 
 
@@ -23,15 +23,13 @@ function App() {
 
     setLanguage(detectedLanguage);
 
-    // Check if "example" is present in the response
- const exampleStart = text.indexOf("**example") !== -1 ? text.indexOf("**example") : text.indexOf("**Example");
-
+    const exampleStart = text.indexOf("**example") !== -1 ? text.indexOf("**example") : text.indexOf("**Example");
 
     if (exampleStart !== -1) {
       const exampleCode = text.substring(exampleStart);
       const cleanedExample = exampleCode.replace(/```[\w]*\n/g, '').trim();
-      setExampleLines(cleanedExample); // Store the example code separately
-      return text.substring(0, exampleStart).trim(); // Return text without the example part
+      setExampleLines(cleanedExample);
+      return text.substring(0, exampleStart).trim();
     }
 
     return text.replace(/```[\w]*\n/g, '').trim();
@@ -40,6 +38,8 @@ function App() {
   const handleGenerate = async () => {
     if (!prompt.trim()) return; 
     setLoading(true);
+    setResponseLines('');
+    setExampleLines('');
 
     try {
       const result = await axios.post('https://ai-model-backend-u1cg.onrender.com/generate', { prompt });
@@ -54,73 +54,47 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <div className="app-container">
       <header className="App-header">
         <h1 className='text-center'>Generative AI Model By Khushal Sharma</h1>
-        <p className='text-center'>Enter a prompt below to generate content using the AI model.</p>
+      </header>
 
-        <textarea
-          rows="5"
-          cols="20"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Write your prompt here..."
-          style={{ padding: '10px', margin: '20px 0', fontSize: '16px' }}
-        />
+      <div className="output-container">
+        <h2>Generated Response:</h2>
 
-        <button
-          onClick={handleGenerate}
-          style={{ padding: '10px 20px', fontSize: '18px' }}
-          disabled={loading}
-        >
-          {loading ? 'Generating...' : 'Generate'}
-        </button>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <SyntaxHighlighter language={language} style={atomOneDark}>
+            {responseLines}
+          </SyntaxHighlighter>
+        )}
 
-        <div className='container'
-          style={{
-            marginTop: '30px',
-            fontSize: '18px',
-            textAlign: 'left',
-            width: '100%',
-            backgroundColor: '#282c34',
-            color: '#ffffff',
-            padding: '20px',
-            borderRadius: '8px',
-            overflowX: 'auto',
-            maxHeight: '400px',
-          }}
-        >
-          <h2>Generated Response:</h2>
-
-          {loading ? <LoadingSpinner /> : (
-            <SyntaxHighlighter language={language} style={atomOneDark}>
-              {responseLines}
-            </SyntaxHighlighter>
-          )}
-        </div>
-
-        {/* Conditionally render the example code block */}
         {exampleLines && (
-          <div className='example-container'
-            style={{
-              marginTop: '30px',
-              fontSize: '18px',
-              textAlign: 'left',
-              width: '100%',
-              backgroundColor: '#1e1e1e',
-              color: '#ffffff',
-              padding: '20px',
-              borderRadius: '8px',
-              overflowX: 'auto',
-            }}
-          >
-            <h2>Code Example:</h2>
+          <div className="example-container">
+            <h2> Example:</h2>
             <SyntaxHighlighter language={language} style={atomOneDark}>
               {exampleLines}
             </SyntaxHighlighter>
           </div>
         )}
-      </header>
+      </div>
+
+      {/* Input Section at the Bottom */}
+      <div className="input-section">
+        <textarea
+          rows="3"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Write your prompt here..."
+          className="prompt-input"
+        />
+
+        <button onClick={handleGenerate} className="generate-button" disabled={loading}>
+          {loading ? 'Generating...' : 'Generate'}
+        </button>
+      </div>
+
       <footer className='text-white text-center'>
         Created under Nodejs and React by @khushalsharma
       </footer>
