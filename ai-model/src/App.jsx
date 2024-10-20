@@ -71,7 +71,19 @@ function App() {
         )}
 
         {exampleLines && (
-          <div className="example-container">
+          <div className="example-container"  style={{
+    marginTop: '30px',
+    fontSize: '18px',
+    textAlign: 'left',
+    width: '100%',
+    backgroundColor: '#1e1f29', // Darker shade for the example container
+    color: '#e5e5e5', // Light gray for better readability
+    padding: '20px',
+    borderRadius: '8px',
+    overflowX: 'auto',
+    border: '1px solid #76c7c0', // Soft teal border for distinction
+    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.5)' // Enhanced shadow effect
+  }}>
             <h2> Example:</h2>
             <SyntaxHighlighter language={language} style={atomOneDark}>
               {exampleLines}
