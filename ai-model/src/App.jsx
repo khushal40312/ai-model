@@ -24,7 +24,7 @@ function App() {
     setLanguage(detectedLanguage);
 
     // Check if "example" is present in the response
-    const exampleStart = text.indexOf("**example**");
+    const exampleStart = text.indexOf("**example"||"**Example");
 
     if (exampleStart !== -1) {
       const exampleCode = text.substring(exampleStart);
