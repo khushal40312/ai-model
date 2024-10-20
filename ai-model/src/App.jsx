@@ -99,27 +99,26 @@ function App() {
         </div>
 
         {/* Conditionally render the example code block */}
-      {exampleLines && (
   <div className='example-container'
-    style={{
-      marginTop: '30px',
-      fontSize: '18px',
-      textAlign: 'left',
-      width: '100%',
-      backgroundColor: 'black', // Slightly lighter background
-      color: '#dcdcdc', // Lighter text color for contrast
-      padding: '20px',
-      borderRadius: '8px',
-      overflowX: 'auto',
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)' // Subtle shadow for depth
-    }}
-  >
-    <h2 style={{ color: '#76c7c0' }}>Code Example:</h2> {/* Soft accent color for heading */}
-    <SyntaxHighlighter language={language} style={atomOneDark}>
-      {exampleLines}
-    </SyntaxHighlighter>
-  </div>
-)}
+  style={{
+    marginTop: '30px',
+    fontSize: '18px',
+    textAlign: 'left',
+    width: '100%',
+    backgroundColor: '#1e1f29 !important', // Darker shade for the example container
+    color: '#e5e5e5', // Light gray for better readability
+    padding: '20px',
+    borderRadius: '8px',
+    overflowX: 'auto',
+    border: '1px solid #76c7c0', // Soft teal border for distinction
+    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.5)' // Enhanced shadow effect
+  }}
+>
+  <h2 style={{ color: '#76c7c0' }}>Code Example:</h2> {/* Accent color for the heading */}
+  <SyntaxHighlighter language={language} style={atomOneDark}>
+    {exampleLines}
+  </SyntaxHighlighter>
+</div>
 
       </header>
       <footer className='text-white text-center'>
