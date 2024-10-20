@@ -24,7 +24,7 @@ function App() {
     setLanguage(detectedLanguage);
 
     // Check if "example" is present in the response
-  const exampleStart = text.indexOf("**example") !== -1 ? text.indexOf("**example") : text.indexOf("**Example");
+ const exampleStart = text.indexOf("**example") !== -1 ? text.indexOf("**example") : text.indexOf("**Example");
 
 
     if (exampleStart !== -1) {
@@ -100,27 +100,26 @@ function App() {
         </div>
 
         {/* Conditionally render the example code block */}
-  <div className='example-container'
-  style={{
-    marginTop: '30px',
-    fontSize: '18px',
-    textAlign: 'left',
-    width: '100%',
-    backgroundColor: '#1e1f29 !important', // Darker shade for the example container
-    color: '#e5e5e5', // Light gray for better readability
-    padding: '20px',
-    borderRadius: '8px',
-    overflowX: 'auto',
-    border: '1px solid #76c7c0', // Soft teal border for distinction
-    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.5)' // Enhanced shadow effect
-  }}
->
-  <h2 style={{ color: '#76c7c0' }}>Code Example:</h2> {/* Accent color for the heading */}
-  <SyntaxHighlighter language={language} style={atomOneDark}>
-    {exampleLines}
-  </SyntaxHighlighter>
-</div>
-
+        {exampleLines && (
+          <div className='example-container'
+            style={{
+              marginTop: '30px',
+              fontSize: '18px',
+              textAlign: 'left',
+              width: '100%',
+              backgroundColor: '#1e1e1e',
+              color: '#ffffff',
+              padding: '20px',
+              borderRadius: '8px',
+              overflowX: 'auto',
+            }}
+          >
+            <h2>Code Example:</h2>
+            <SyntaxHighlighter language={language} style={atomOneDark}>
+              {exampleLines}
+            </SyntaxHighlighter>
+          </div>
+        )}
       </header>
       <footer className='text-white text-center'>
         Created under Nodejs and React by @khushalsharma
