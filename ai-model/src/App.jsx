@@ -99,26 +99,28 @@ function App() {
         </div>
 
         {/* Conditionally render the example code block */}
-        {exampleLines && (
-          <div className='example-container'
-            style={{
-              marginTop: '30px',
-              fontSize: '18px',
-              textAlign: 'left',
-              width: '100%',
-              backgroundColor: '#1e1e1e',
-              color: '#ffffff',
-              padding: '20px',
-              borderRadius: '8px',
-              overflowX: 'auto',
-            }}
-          >
-            <h2>Code Example:</h2>
-            <SyntaxHighlighter language={language} style={atomOneDark}>
-              {exampleLines}
-            </SyntaxHighlighter>
-          </div>
-        )}
+      {exampleLines && (
+  <div className='example-container'
+    style={{
+      marginTop: '30px',
+      fontSize: '18px',
+      textAlign: 'left',
+      width: '100%',
+      backgroundColor: '#2a2d37', // Slightly lighter background
+      color: '#dcdcdc', // Lighter text color for contrast
+      padding: '20px',
+      borderRadius: '8px',
+      overflowX: 'auto',
+      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)' // Subtle shadow for depth
+    }}
+  >
+    <h2 style={{ color: '#76c7c0' }}>Code Example:</h2> {/* Soft accent color for heading */}
+    <SyntaxHighlighter language={language} style={atomOneDark}>
+      {exampleLines}
+    </SyntaxHighlighter>
+  </div>
+)}
+
       </header>
       <footer className='text-white text-center'>
         Created under Nodejs and React by @khushalsharma
