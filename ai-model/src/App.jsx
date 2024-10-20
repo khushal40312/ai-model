@@ -106,7 +106,7 @@ function App() {
       fontSize: '18px',
       textAlign: 'left',
       width: '100%',
-      backgroundColor: '#2a2d37', // Slightly lighter background
+      backgroundColor: 'black', // Slightly lighter background
       color: '#dcdcdc', // Lighter text color for contrast
       padding: '20px',
       borderRadius: '8px',
